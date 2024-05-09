@@ -25,6 +25,15 @@ The system will use metadata from your commit history to determine the author na
 
 Have package data? Just commit it to the repo alongside the code.
 
+Does the package have dependencies? If so, declare them in `__init__.py`:
+
+```python
+__requires__ = [
+	"requests",
+	"pip-run",
+]
+```
+
 To add a description to the project, just create the repo in GitHub, set the description, and configure the remote. For example:
 
 ```shell
@@ -48,6 +57,8 @@ The Coherent System loves namespace packages. From the Zen of Python:
 > Namespaces are one honking great idea -- let's do more of those!
 
 To create a package in a namespace, simply name the repo with the dot-separate path to the module within the namespace. See [coherent.build](https://github.com/coherent-oss/coherent.build) as an example.
+
+To cut a release, just tag the commit to be released with the v-prefixed version for the release. Push that commit (for good measure), build the release, and then upload the build using [twine](https://pypi.org/project/twine).
 
 ## Limitations
 
