@@ -29,8 +29,8 @@ Does the package have dependencies? If so, declare them in `__init__.py`:
 
 ```python
 __requires__ = [
-	"requests",
-	"pip-run",
+    "requests",
+    "pip-run",
 ]
 ```
 
