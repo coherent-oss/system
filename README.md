@@ -12,20 +12,28 @@ The system additionally aims to reduce duplication by adopting a new *essential 
 
 ## Getting Started
 
-To get started creating a Coherent System project, simply create a Git repository representing the name of the package as it should appear in the Python ecosystem and then commit the source code directly in the root of that project (probably starting with `__init__.py`).
+To get started creating a Coherent System project, simply create a Git repository representing the name of the package as it should appear in the Python ecosystem and then commit the source code directly in the root of that project (probably starting with `__init__.py`). If using the GitHub and the [`gh` tool](https://cli.github.com/):
 
-As the system aims to degrade gracefully, that one commit is all that's necessary to build a project. To build it, install [coherent.build](https://pypi.org/project/coherent.build) somewhere and run it or use pip-run to run it:
+```shell
+ @ gh repo create --public --description "Library that achieves world peace" --clone worldpeacelib
+ @ cd worldpeacelib
+ @ echo "print('magic happens here')" > __init__.py
+ @ git add __init__.py
+ @ git commit -m "Add initial library behavior."
+```
+
+As the system aims to degrade gracefully, that one commit is all that's necessary to build a viable project. To build it, install [coherent.build](https://pypi.org/project/coherent.build) somewhere and run it or use pip-run to run it:
 
 ```shell
  @ pip-run coherent.build -- -m coherent.build
  ...
 ```
 
-The system will use metadata from your commit history to determine the author name and email, the name of the project from the repo root path, the version from the commit history (no tags means an 0.0.1 prerelease), and produce a source distribution and wheel suitable for installation.
+The system will use metadata from your commit history to determine the author name and email, the name of the project from the repo root path, the version from the commit history (no tags means an 0.1 prerelease), the description from the GitHub repo, and produce a source distribution and wheel suitable for installation.
 
 Have package data? Just commit it to the repo alongside the code.
 
-Does the package have dependencies? If so, declare them in `__init__.py`:
+Does the package have dependencies? If so, declare them in `__init__.py` (with [ambitions to auto-detect those from imports](https://github.com/coherent-oss/coherent.build/issues/3)):
 
 ```python
 __requires__ = [
@@ -33,15 +41,6 @@ __requires__ = [
     "pip-run",
 ]
 ```
-
-To add a description to the project, just create the repo in GitHub, set the description, and configure the remote. For example:
-
-```shell
- @ gh repo create --public packagename --description "Awesome package with wings"
- @ git remote add origin https://github.com/$USER/packagename
-```
-
-That description will be used as the summary when building the package.
 
 Add a README.md to the repo to give users an overview to be included in the project's description.
 
@@ -58,7 +57,11 @@ The Coherent System loves namespace packages. From the Zen of Python:
 
 To create a package in a namespace, simply name the repo with the dot-separate path to the module within the namespace. See [coherent.build](https://github.com/coherent-oss/coherent.build) as an example.
 
-To cut a release, just tag the commit to be released with the v-prefixed version for the release. Push that commit (for good measure), build the release, and then upload the build using [twine](https://pypi.org/project/twine).
+To cut a release, just tag the commit to be released with the v-prefixed version for the release. Push that commit (for good measure), build the release, and then upload the build using [twine](https://pypi.org/project/twine), e.g.:
+
+```
+ @ rm -r dist; pip-run coherent.build -- -m coherent.build && twine upload dist/*
+```
 
 ## Limitations
 
