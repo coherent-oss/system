@@ -22,14 +22,14 @@ To get started creating a Coherent System project, simply create a Git repositor
  @ git commit -m "Add initial library behavior."
 ```
 
-As the system aims to degrade gracefully, that one commit is all that's necessary to build a viable project. To build it, install [coherent.build](https://pypi.org/project/coherent.build) somewhere and run it or use pip-run to run it:
+As the system employs graceful degradation, that one commit is all that's necessary to bootstrap a viable project. To build it, install [coherent.build](https://pypi.org/project/coherent.build) somewhere and run it or use pip-run to run it:
 
 ```shell
  @ pip-run coherent.build -- -m coherent.build
  ...
 ```
 
-The system will use metadata from your commit history to determine the author name and email, the name of the project from the repo root path, the version from the commit history (no tags means an 0.1 prerelease), the description from the GitHub repo, and produce a source distribution and wheel suitable for installation.
+The system will use metadata from your commit history to determine the author name and email, the name of the project from the repo root path, the version from the commit history (no tags means an 0.1 prerelease), the description from the GitHub repo, supported Pythons from the non-EOL Python versions, and produce a source distribution and wheel suitable for installation. See [the source](https://github.com/coherent-oss/coherent.build/blob/main/discovery.py) for more detail on what metadata is discovered and how.
 
 Have package data? Just commit it to the repo alongside the code.
 
@@ -66,4 +66,4 @@ To cut a release, just tag the commit to be released with the v-prefixed version
 
 ## Limitations
 
-As this is a fledgling prototype of a system thusfar, the limitations are to great to enumerate, but follow the [issues](https://github.com/coherent-oss/system/issues) for more.
+As this is a fledgling prototype of a system thusfar, the limitations are to great to enumerate, but follow the [issues](https://github.com/coherent-oss/system/issues) (also [coherent.build issues](https://github.com/coherent-oss/coherent.build/issues) and [coherent.test issues](https://github.com/coherent-oss/coherent.test/issues)) for more.
