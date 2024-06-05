@@ -8,7 +8,7 @@ This user guide provides an overview of the system and directions on getting sta
 
 The system first and foremost aims to institutionalize and automate the ancillary concerns of software development (packaging, CI, linting, type checking, etc), allowing the developer to focus primarily on their code, tests, and documentation. The system achieves this goal by aggressively adopting and evolving best practices and reflecting configuration from existing state, such as the name of the repo. The system aims to "refactor" the development process such that common concerns are managed through common tools and frameworks rather than through shared config.
 
-The system additionally aims to reduce duplication by adopting a new *essential layout*, allowing the source code as found in the repo to reflect the shape of the code as it will appear when installed.
+The system additionally aims to reduce duplication by adopting a new [*essential layout*](essential-layout.md), allowing the source code as found in the repo to reflect the shape of the code as it will appear when installed.
 
 ## Getting Started
 
