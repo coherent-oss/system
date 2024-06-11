@@ -30,7 +30,16 @@ $ mkdir src
 $ mv hello_world src
 ```
 
-Now someone wanting to bring these projects together into a mono repo or just a tree of code for a larger superproject has a problem - these extra directories and layers of abstraction are an impediment to composing projects because of the repetitive and redundant nature:
+Note that while the functionality is still no more sophisticated than the canonical "hello world" script, the user is already dealing with a fair bit of complication:
+
+```
+hello-world
+└── src
+    └── hello_world
+        └── __init__.py
+```
+
+Now someone wanting to bring these projects together into a mono repo or just a tree of code for a larger superproject has a problem - these extra directories and layers of abstraction are an impediment to composing projects because of the repetitive and redundant nature. Consider a superproject containing three dependencies, cssutils, path, and towncrier:
 
 ```
 superproject
@@ -49,7 +58,6 @@ superproject
 The superproject cannot easily represent the code in a shape that reflects the installed layout, meaning that a tooling step is necessary to transform the code from the shape in the repository into the shape in the running environment.
 
 The problem gets even worse when composing projects that share a namespace:
-
 
 ```
 superproject
