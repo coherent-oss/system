@@ -2,6 +2,8 @@
 
 The essential layout aims to move the project's core functionality (code) into the root of the repository, giving it primacy over other ancillary concerns (linting, configuration, packaging) while reducing the redundant layers of directories (repo, "src", namespace, package) and enabling composition of projects using version control.
 
+The essential layout is a key innovation of the [Coherent Software Development System](README.md).
+
 
 ## Motivation
 
@@ -83,6 +85,16 @@ superproject
 
 Not only are the `functools` and `context` modules not found in the same `jaraco` directory, but their names are repeated in the repo name and in the namespace.
 
+
+## Modeling the Essence
+
+The essential layout aims to move the essence of the library (its code) into the root of the repository, such that the repository root _is_ the Python package--no src directory and no separate directory for the package:
+
+```
+hello_world
+├── .git
+└── __init__.py
+```
 
 ## Essentially Composable
 
