@@ -88,7 +88,7 @@ Not only are the `functools` and `context` modules not found in the same `jaraco
 
 ## Modeling the Essence
 
-The essential layout aims to move the essence of the library (its code) into the root of the repository, such that the repository root _is_ the Python package--no src directory and no separate directory for the package:
+The essential layout aims to move the essence of the library (its code) into the root of the repository, such that the repository root _is_ the Python package--no `src` directory and no separate directory for the package:
 
 ```
 hello_world
