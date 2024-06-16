@@ -22,14 +22,21 @@ To get started creating a Coherent System project, simply create a Git repositor
  @ git commit -m "Add initial library behavior."
 ```
 
-As the system employs graceful degradation, that one commit is all that's necessary to bootstrap a viable project. To build it, install [coherent.build](https://pypi.org/project/coherent.build) somewhere and run it or use pip-run to run it:
+As the system employs graceful degradation, that one commit is all that's necessary to bootstrap a viable project. To build it, install [coherent.cli](https://pypi.org/project/coherent.cli) or use `pipx run`:
 
 ```shell
- @ pip-run coherent.build -- -m coherent.build
+ @ coh build
  ...
 ```
 
-The system will use metadata from your commit history to determine the author name and email, the name of the project from the repo root path, the version from the commit history (no tags means an 0.1 prerelease), the description from the GitHub repo, supported Pythons from the non-EOL Python versions, and produce a source distribution and wheel suitable for installation. See [the source](https://github.com/coherent-oss/coherent.build/blob/main/discovery.py) for more detail on what metadata is discovered and how.
+or
+
+```shell
+ @ pipx run coherent.cli build
+ ...
+```
+
+The system will use metadata from the commit history to determine the author name and email, the name of the project from the repo root path, the version from the commit history (no tags means an 0.1 prerelease), the description from the GitHub repo, supported Pythons from the non-EOL Python versions, and produce a source distribution and wheel suitable for installation. See [the source](https://github.com/coherent-oss/coherent.build/blob/main/discovery.py) for more detail on what metadata is discovered and how.
 
 Have package data? Just commit it to the repo alongside the code.
 
@@ -44,10 +51,10 @@ __requires__ = [
 
 Add a README.md to the repo to give users an overview to be included in the project's description.
 
-Ready to create some tests? Create a `tests` dir with modules containing pytest tests. Then run the tests using [coherent.test](https://pypi.org/project/coherent.test):
+Ready to create some tests? Create doctests or a `tests` dir with modules containing pytest tests. Then run the tests using `coh test` or `pipx run coherent.cli test`:
 
 ```shell
- @ pip-run coherent.test -- -m coherent.test
+ @ coh test
  ...
 ```
 
@@ -61,7 +68,7 @@ To cut a release, just tag the commit to be released with the v-prefixed version
 
 ```
  @ git tag -a v1.0.0 && git push
- @ rm -r dist; pip-run coherent.build -- -m coherent.build && twine upload dist/*
+ @ rm -r dist; coh build && twine upload dist/*
 ```
 
 ## Limitations
