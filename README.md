@@ -49,6 +49,10 @@ __requires__ = [
 ]
 ```
 
+> [!Tip]
+> If you need to extract `__requires__` to work with pip or other tools,
+> check [_Extracting Requirements_ in pip-run](https://github.com/jaraco/pip-run#extracting-requirements).
+
 Add a README.md to the repo to give users an overview to be included in the project's description.
 
 Ready to create some tests? Create doctests or a `tests` dir with modules containing pytest tests. Then run the tests using `coh test` or `pipx run coherent.cli test`:
