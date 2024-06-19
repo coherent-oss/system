@@ -58,7 +58,7 @@ Ready to create some tests? Create doctests or a `tests` dir with modules contai
  ...
 ```
 
-The Coherent System loves namespace packages. From the Zen of Python:
+The Coherent System loves namespace packages. From [the Zen of Python](https://peps.python.org/pep-0020/):
 
 > Namespaces are one honking great idea -- let's do more of those!
 
