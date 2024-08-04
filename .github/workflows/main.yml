@@ -100,7 +100,7 @@ jobs:
     needs:
     - test
     - diffcov
-    # - docs
+    - docs
 
     runs-on: ubuntu-latest
 
