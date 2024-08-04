@@ -71,7 +71,7 @@ To create a package in a namespace, simply name the repo with the dot-separate p
 To cut a release, just tag the commit to be released with the v-prefixed version for the release. Push that commit (for good measure), build the release, and then upload the build using [twine](https://pypi.org/project/twine), e.g.:
 
 ```
- @ git tag -a v1.0.0 && git push
+ @ git tag -a v1.0.0 && git push --tags
  @ rm -r dist; coh build && twine upload dist/*
 ```
 
