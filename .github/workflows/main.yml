@@ -84,7 +84,7 @@ jobs:
       run: |
         set -euxo pipefail
         cd docs || exit 0
-        pip install sphinx
+        pip install sphinx jaraco.packaging rst.linker furo sphinx-lint jaraco.tidelift
         python -m sphinx -W --keep-going . ./build/html
         python -m sphinxlint \
           # workaround for sphinx-contrib/sphinx-lint#83
