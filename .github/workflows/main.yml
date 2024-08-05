@@ -49,7 +49,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.x
+          python-version: ${{ matrix.python }}
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
         run: pipx run 'coherent.test>=0.7.0'
 
