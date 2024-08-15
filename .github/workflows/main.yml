@@ -53,6 +53,8 @@ jobs:
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
         run: pipx run 'coherent.test>=0.7.0'
 
+  # diffcov--commented out and worked on in a different branch
+  # see coherent-oss/system#2
   # diffcov:
   #   runs-on: ubuntu-latest
   #   steps:
