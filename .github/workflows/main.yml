@@ -53,6 +53,7 @@ jobs:
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
         run: pipx run 'coherent.test>=0.7.0'
         env:
+          # See coherent-oss/coherent.build#21
           GH_TOKEN: ${{ github.token }}
 
   # diffcov--commented out and worked on in a different branch
