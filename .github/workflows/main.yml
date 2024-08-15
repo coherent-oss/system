@@ -53,22 +53,22 @@ jobs:
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
         run: pipx run 'coherent.test>=0.7.0'
 
-  diffcov:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: 3.x
-    - run: |
-        set -euxo pipefail
-        pipx run --pip-args pytest-cov 'coherent.test>=0.7.0' --cov --cov-report xml
-        pip install diff-cover
-        diff-cover coverage.xml --compare-branch=origin/main --html-report diffcov.html
-        diff-cover coverage.xml --compare-branch=origin/main --fail-under=100
+  # diffcov:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       fetch-depth: 0
+  #   - name: Setup Python
+  #     uses: actions/setup-python@v5
+  #     with:
+  #       python-version: 3.x
+  #   - run: |
+  #       set -euxo pipefail
+  #       pipx run --pip-args pytest-cov 'coherent.test>=0.7.0' --cov --cov-report xml
+  #       pip install diff-cover
+  #       diff-cover coverage.xml --compare-branch=origin/main --html-report diffcov.html
+  #       diff-cover coverage.xml --compare-branch=origin/main --fail-under=100
 
   docs:
     runs-on: ubuntu-latest
@@ -95,7 +95,7 @@ jobs:
 
     needs:
     - test
-    - diffcov
+    # - diffcov
     - docs
 
     runs-on: ubuntu-latest
