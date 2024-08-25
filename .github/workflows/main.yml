@@ -128,7 +128,7 @@ jobs:
           python-version: 3.x
       - name: Run
         run: |
-          pipx run coherent.build
+          pipx run coherent.cli build
           pipx run twine upload dist/*
         env:
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
