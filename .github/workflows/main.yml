@@ -3,6 +3,10 @@ name: tests
 
 on:
   workflow_call:
+    secrets:
+      PYPI_TOKEN:
+        required: false
+
 
 permissions:
   contents: read
