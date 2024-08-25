@@ -136,3 +136,4 @@ jobs:
           pipx run twine upload dist/*
         env:
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
