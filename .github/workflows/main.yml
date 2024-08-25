@@ -45,8 +45,11 @@ jobs:
           platform: ubuntu-latest
         - python: pypy3.10
           platform: ubuntu-latest
+
     runs-on: ${{ matrix.platform }}
+    
     continue-on-error: ${{ matrix.python == '3.13' }}
+
     steps:
       - uses: actions/checkout@v4
       - name: Setup Python
@@ -80,6 +83,7 @@ jobs:
 
   docs:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v4
       with:
@@ -104,8 +108,8 @@ jobs:
 
     needs:
     - test
-    # - diffcov
     - docs
+    # - diffcov
 
     runs-on: ubuntu-latest
 
@@ -118,21 +122,24 @@ jobs:
   release:
     permissions:
       contents: write
+
     needs:
     - check
+
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.x
-      - name: Build and upload to PyPI
-        run: |
-          pipx run coherent.cli build
-          pipx run twine upload dist/*
-        env:
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
-          GH_TOKEN: ${{ github.token }}
+    - uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.x
+    - name: Build and upload to PyPI
+      run: |
+        pipx run coherent.cli build
+        pipx run twine upload dist/*
+      env:
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        GH_TOKEN: ${{ github.token }}
