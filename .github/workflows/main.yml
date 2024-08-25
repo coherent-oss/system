@@ -7,7 +7,6 @@ on:
       PYPI_TOKEN:
         required: false
 
-
 permissions:
   contents: read
 
@@ -114,7 +113,6 @@ jobs:
       uses: re-actors/alls-green@release/v1
       with:
         jobs: ${{ toJSON(needs) }}
-
 
   release:
     permissions:
