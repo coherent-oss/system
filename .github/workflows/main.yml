@@ -101,6 +101,9 @@ jobs:
         python -m sphinxlint \
           \ # workaround for sphinx-contrib/sphinx-lint#83
           --jobs 1
+      env:
+        # token is required for `gh` to resolve metadata
+        GH_TOKEN: ${{ github.token }}
 
   check:  # This job does nothing and is only used for the branch protection
     if: always()
