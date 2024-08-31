@@ -98,9 +98,7 @@ jobs:
         cd docs || exit 0
         pip install sphinx jaraco.packaging rst.linker furo sphinx-lint jaraco.tidelift
         python -m sphinx -W --keep-going . ./build/html
-        python -m sphinxlint \
-          \ # workaround for sphinx-contrib/sphinx-lint#83
-          --jobs 1
+        python -m sphinxlint
       env:
         # token is required for `gh` to resolve metadata
         GH_TOKEN: ${{ github.token }}
