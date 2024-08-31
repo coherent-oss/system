@@ -99,7 +99,7 @@ jobs:
         pip install sphinx jaraco.packaging rst.linker furo sphinx-lint jaraco.tidelift
         python -m sphinx -W --keep-going . ./build/html
         python -m sphinxlint \
-          # workaround for sphinx-contrib/sphinx-lint#83
+          \ # workaround for sphinx-contrib/sphinx-lint#83
           --jobs 1
 
   check:  # This job does nothing and is only used for the branch protection
