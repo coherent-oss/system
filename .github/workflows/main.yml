@@ -57,7 +57,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
-        run: pipx run 'coherent.test>=0.7.0'
+        run: pipx run --python ${{ matrix.python }} 'coherent.test>=0.7.0'
         env:
           # See coherent-oss/coherent.build#21
           GH_TOKEN: ${{ github.token }}
