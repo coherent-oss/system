@@ -56,6 +56,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+      - name: Install wget (Windows only)
+        if: runner.os == 'Windows'
+        run: choco install wget -y
+      - name: Workaround pypa/pipx#1539
+        run: wget https://raw.githubusercontent.com/jaraco/pipx-1539/main/workaround-1539.py -O - | python3
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
         run: pipx run --python ${{ matrix.python }} 'coherent.test>=0.7.0'
         env:
