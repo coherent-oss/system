@@ -10,6 +10,9 @@ test-linux:
     - saas-linux-small-amd64
 
     script:
+    # Let git know that the project dir is safe. coherent-oss/system#18
+    - git config --global --add safe.directory $CI_PROJECT_DIR
+
     - pipx run --python 3.12 coherent.cli test
 
 
