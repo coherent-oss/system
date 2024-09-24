@@ -1,0 +1,42 @@
+stages:
+    - test
+    - publish
+
+
+test-linux:
+    stage: test
+    image: registry.gitlab.com/python-devs/ci-images:active
+    tags:
+    - saas-linux-small-amd64
+
+    script:
+    - pipx run --python 3.12 coherent.cli test
+
+
+publish:
+    stage: publish
+    image: registry.gitlab.com/python-devs/ci-images:active
+    rules:
+    - if: $CI_COMMIT_TAG
+
+    script:
+    - pipx run --python 3.12 coherent.cli build
+
+    # Retrieve the OIDC token from GitLab CI/CD, and exchange it for a PyPI API token.
+    #
+    # See https://docs.pypi.org/trusted-publishers/using-a-publisher/#gitlab-cicd
+    - echo "Creating publishing token venv"
+    - $BASE_PYTHON -m venv /tmp/publish
+    - /tmp/publish/bin/pip install id
+    - echo "Token exchange"
+    - oidc_token=$(/tmp/publish/bin/python -m id PYPI)
+    # Replace "https://pypi.org/*" with "https://test.pypi.org/*" if uploading to TestPyPI.
+    - resp=$(curl --silent -X POST https://pypi.org/_/oidc/mint-token -d "{\"token\":\"${oidc_token}\"}")
+    - api_token=$(jq --raw-output '.token' <<< "${resp}")
+
+    # Upload to PyPI authenticating via the newly-minted token.
+    # Add "--repo testpypi" if uploading to TestPyPI
+    # - echo "Publishing with ${api_token}"
+    - echo "Publishing via Trusted Publisher"
+    - twine upload -p "${api_token}" dist/*
+
