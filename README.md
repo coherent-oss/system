@@ -1,6 +1,6 @@
 # Coherent Software Development System
 
-The Coherent Software Development System (system) is the implementation of [Jason's vision](https://blog.jaraco.com/vision-for-scalable-OSS-development/) for scalable and sustainable open source development. It builds on decades of experience in the Python ecosystem and working on enterprise software at a global scale.
+The Coherent Software Development System (system) is the implementation of [Jason's vision](https://blog.jaraco.com/vision-for-scalable-OSS-development/) for scalable and sustainable open source development in the Python ecosystem. It builds on decades of experience in the ecosystem and working on enterprise software at a global scale.
 
 This user guide provides an overview of the system and directions on getting started with it.
 
@@ -9,6 +9,32 @@ This user guide provides an overview of the system and directions on getting sta
 The system first and foremost aims to institutionalize and automate the ancillary concerns of software development (packaging, CI, linting, type checking, etc), allowing the developer to focus primarily on their code, tests, and documentation. The system achieves this goal by aggressively adopting and evolving best practices and reflecting configuration from existing state, such as the name of the repo. The system aims to "refactor" the development process such that common concerns are managed through common tools and frameworks rather than through shared config.
 
 The system additionally aims to reduce duplication and unlock composition by adopting a new [*essential layout*](essential-layout.md), allowing the source code as found in the repo to reflect the shape of the code as it will appear when installed.
+
+## Key Features
+
+This system is characterized by a few key features.
+
+### Source is primary
+
+For any given (Git) repo, the developer's primary concern should be the source code, tests, and (maybe) documentation. The developer is empowered to focus on the design, implementation, and that lifecycle and freed from systematic concerns that apply to many projects. Metadata and other config concerns are collected in a separate `(meta)` path.
+
+### Systematic concerns are shared
+
+The scope of the "system" is flexible, but typically represents the shared concerns around a team or organization or individual. The scope of a system is limited by the willingness of members of that group to align with the vision of the system. For example, some organizations have a highly converged system for managing all software across the organization (monorepo, build infra, deployment infra). Others are more fragmented.
+
+The Open Source community is something of an organization with some shared conventions (Git for source control, GitHub popular for a platform), but also follows a convention of "each repo is their own island." Even systematic solutions like ReadTheDocs require boilerplate copied into each repository. In the Coherent System, most concerns apart from source code development are managed centrally in tooling and infrastructure.
+
+### Metadata is dynamic
+
+Although much metadata is often static, it also does tend to change and evolve over time. The Coherent System aims to avoid storing this metadata in a static form, but instead adapt as assumptions change. For example, the default behavior for "supported Python versions" is that all non-sunset Python versions are supported. When a older version of Python is sunset, the metadata adapts automatically.
+
+### Derive config from reusable sources
+
+As a maintainer of open source projects, developers are asked to replicate config and metadata to multiple locations (source code, GitHub project config, GitHub release notes, published documentation, enterprise support systems). The Coherent philosophy is to ask the developer to define that config and metadata in one place and the any "copies" should reference from there. For example, instead of configuring the project description both in source code metadata and in GitHub's project description, the system resolves the project description from the GitHub project description, allowing it to be consistently defined exactly once. Dependencies are derived from the imports that demand them.
+
+### Projects are composable
+
+By adopting the essential layout, the source code is shaped in a format consistent with its runtime manifestation, allowing it to be readily composed across projects. This approach removes redundant and repetitive naming within and across projects and enables more elegant source code management.
 
 ## Getting Started
 
@@ -40,11 +66,13 @@ The system will use metadata from the commit history to determine the author nam
 
 Have package data? Just commit it to the repo alongside the code.
 
-Does the package have dependencies? If so, declare them in `__init__.py` (with [ambitions to auto-detect those from imports](https://github.com/coherent-oss/coherent.build/issues/3)):
+Does the package have dependencies? By default, the system will infer dependencies from the imports in the source code, so in many cases, dependencies are inferred automatically.
+
+In some cases, such as for 'binary' dependencies (i.e. `subprocess.run('tool')`) or for dynamic imports (`import_module('somepkg')`), the system does not yet infer dependencies. Additionally, if there are specific version constraints, those will not be detected. In this case, declare the requirements in `__init__.py` as so:
 
 ```python
 __requires__ = [
-    "requests",
+    "requests >= 5.0",
     "pip-run",
 ]
 ```
@@ -78,3 +106,16 @@ To cut a release, just tag the commit to be released with the v-prefixed version
 ## Limitations
 
 As this is a fledgling prototype of a system thusfar, the limitations are to great to enumerate, but follow the [issues](https://github.com/coherent-oss/system/issues) (also [coherent.build issues](https://github.com/coherent-oss/coherent.build/issues) and [coherent.test issues](https://github.com/coherent-oss/coherent.test/issues)) for more.
+
+
+## Compromises
+
+In some cases, practicality beats purity, and the Coherent System has had to compromise on its principle of "no boilerplate".
+
+### GitHub workflows
+
+By necessity, GitHub requires a workflow definition for each repo. The Coherent System requires a boilerplate workflow that references a shared workflow across projects.
+
+### pyproject.toml
+
+While the Cohrent System does not require a `pyproject.toml`, many tools including the basic builders and installers require one to know to use the `coherent.build` backend. While Jason has [aspirations to obviate this need](https://hackmd.io/gsTGbh9TRbKFj5Y7nkuNzA), it's still convenient to add a minimal pyproject.toml to each repo.
