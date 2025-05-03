@@ -1,6 +1,6 @@
 ## Overview
 
-The essential layout aims to move the project's core functionality (code) into the root of the repository, giving it primacy over other ancillary concerns (linting, configuration, packaging) while reducing the redundant layers of directories (repo, "src", namespace, package) and enabling composition of projects using version control.
+The essential layout aims to move the project's core functionality (code) into the root of the repository, giving it primacy over other ancillary concerns (linting, configuration, packaging, licensing) while reducing the redundant layers of directories (repo, "src", namespace, package) and enabling composition of projects using version control.
 
 The essential layout is a key innovation of the [Coherent Software Development System](README.md).
 
