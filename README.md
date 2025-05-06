@@ -105,8 +105,9 @@ To cut a release, just tag the commit to be released with the v-prefixed version
 
 ## Limitations
 
-As this is a fledgling prototype of a system thusfar, the limitations are to great to enumerate, but follow the [issues](https://github.com/coherent-oss/system/issues) (also [coherent.build issues](https://github.com/coherent-oss/coherent.build/issues) and [coherent.test issues](https://github.com/coherent-oss/coherent.test/issues)) for more.
+Currently, the system supports only pure-Python packages with exactly one root package.
 
+Follow the [issues](https://github.com/coherent-oss/system/issues) (also [coherent.build issues](https://github.com/coherent-oss/coherent.build/issues) and [coherent.test issues](https://github.com/coherent-oss/coherent.test/issues)) for details and please file requests for gaps prevent adoption in your favorite packages.
 
 ## Compromises
 
