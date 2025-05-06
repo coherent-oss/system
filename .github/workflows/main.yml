@@ -22,6 +22,9 @@ env:
   PIP_DISABLE_PIP_VERSION_CHECK: 'true'
   PIP_NO_WARN_SCRIPT_LOCATION: 'true'
 
+  # Opt in to experimental flit-backed sdists
+  SDIST_BACKEND: 'flit'
+
 jobs:
   test:
     strategy:
