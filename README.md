@@ -96,11 +96,12 @@ The Coherent System loves namespace packages. From [the Zen of Python](https://p
 
 To create a package in a namespace, simply name the repo with the dot-separate path to the module within the namespace. See [coherent.build](https://github.com/coherent-oss/coherent.build) as an example.
 
-To cut a release, just tag the commit to be released with the v-prefixed version for the release. Push that commit (for good measure), build the release, and then upload the build using [twine](https://pypi.org/project/twine), e.g.:
+To cut a release, just tag the commit to be released with the v-prefixed version for the release. The `coh` command provides a handy way to auto-detect the appropriate version based on [semver](https://semver.org/) (`major`, `minor`, `patch`). Then, push that commit, where it will be built by CI and released to PyPI. e.g.:
 
-```
- @ git tag -a v1.0.0 && git push --tags
- @ rm -r dist; coh build && twine upload dist/*
+```shell
+ @ coh tag major
+Created tag v1.0.0
+ @ git push
 ```
 
 ## Limitations
