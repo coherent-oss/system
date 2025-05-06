@@ -78,7 +78,7 @@ __requires__ = [
 ```
 
 > [!Tip]
-> If you need to extract the `__requires__` list to pass it to pip or other tools,
+> To extract the `__requires__` list to pass it to pip or other tools,
 > check [_Extracting Requirements_ in pip-run](https://github.com/jaraco/pip-run#extracting-requirements).
 
 Add a README.md to the repo to give users an overview to be included in the project's description.
