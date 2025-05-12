@@ -22,9 +22,6 @@ env:
   PIP_DISABLE_PIP_VERSION_CHECK: 'true'
   PIP_NO_WARN_SCRIPT_LOCATION: 'true'
 
-  # Opt in to experimental flit-backed sdists
-  SDIST_BACKEND: 'flit'
-
   # Avoid unsafe sys.path (coherent-oss/system#21)
   PYTHONSAFEPATH: '1'
 
