@@ -6,7 +6,7 @@ This user guide provides an overview of the system and directions on getting sta
 
 ## Overview
 
-The system first and foremost aims to institutionalize and automate the ancillary concerns of software development (packaging, CI, linting, type checking, etc), allowing the developer to focus primarily on their code, tests, and documentation. The system achieves this goal by aggressively adopting and evolving best practices and reflecting configuration from existing state, such as the name of the repo. The system aims to "refactor" the development process such that common concerns are managed through common tools and frameworks rather than through shared config.
+The system first and foremost aims to institutionalize and automate the [ancillary concerns](https://docs.google.com/presentation/d/111mO95s35P3AZzvhMD7uRo0ARgb3GRkuzjqqi8GS48U/edit?slide=id.g3561a517004_0_53#slide=id.g3561a517004_0_53) of software development (packaging, CI, linting, type checking, etc), allowing the developer to focus primarily on their code, tests, and documentation. The system achieves this goal by aggressively adopting and evolving best practices and reflecting configuration from existing state, such as the name of the repo. The system aims to "refactor" the development process such that common concerns are managed through common tools and frameworks rather than through shared config.
 
 The system additionally aims to reduce duplication and unlock composition by adopting a new [*essential layout*](essential-layout.md), allowing the source code as found in the repo to reflect the shape of the code as it will appear when installed.
 
