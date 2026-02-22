@@ -63,7 +63,7 @@ jobs:
           allow-prereleases: true
       - name: Install wget (Windows only)
         if: runner.os == 'Windows'
-        run: winget install --id JernejSimoncic.Wget --silent --accept-package-agreements
+        run: winget install --id JernejSimoncic.Wget --silent --accept-package-agreements --accept-source-agreements
       - name: Workaround pypa/pipx#1539
         run: wget https://raw.githubusercontent.com/jaraco/pipx-1539/main/workaround-1539.py -O - | python3
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
