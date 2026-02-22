@@ -64,6 +64,16 @@ jobs:
       - name: Install wget (Windows only)
         if: runner.os == 'Windows'
         run: winget install --id JernejSimoncic.Wget --silent --accept-package-agreements --accept-source-agreements
+      - name: Add wget to PATH
+        if: runner.os == 'Windows'
+        run: |
+          # The default install location is often C:\Users\<username>\AppData\Local\Microsoft\WinGet\Links
+          # Add the directory containing the wget.exe link/shim to the GITHUB_PATH
+          $installDir = "$env:LOCALAPPDATA\Microsoft\WinGet\Links"
+          echo "::add-path::$installDir"
+        shell: powershell
+        # Note: echo "::add-path::..." is the older syntax. The recommended way in newer runners is to use a file:
+        # run: echo "$env:LOCALAPPDATA\Microsoft\WinGet\Links" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - name: Workaround pypa/pipx#1539
         run: wget https://raw.githubusercontent.com/jaraco/pipx-1539/main/workaround-1539.py -O - | python3
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
