@@ -13,7 +13,7 @@ Consider the world's simplest "hello world" package. The classic "hello world" p
 print("hello world")
 ```
 
-But in a world with version control and packaged distributions, the "hello world" library/program suddenly requires a whole lot of boilerplate and redundant directories:
+But in a world with version control and packaged distributions, the "hello world" library/program suddenly requires a redundant directory and boilerplate:
 
 ```shell
 $ git init hello-world
@@ -23,7 +23,7 @@ $ cat > hello_world/__init__.py
 print("hello world")
 ```
 
-Shortly thereafter, the user adds more ancillary details (a pyproject.toml, a ruff config, testing and coverage config) until an [empty project looks anything but empty](https://github.com/jaraco/skeleton/) and a one-line project like "hello world" is dominated by the ancillary concerns (boilerplate the ocean).
+The name "hello world" now appears twice (and in two forms). Shortly thereafter, the user adds more ancillary details (a pyproject.toml, a ruff config, testing and coverage config) until an [empty project looks anything but empty](https://github.com/jaraco/skeleton/) and a one-line project like "hello world" is dominated by the ancillary concerns (boilerplate the ocean).
 
 Moreover, since project maintainers want to keep the essential source code separate from from these ancillary concerns, they're motivated to further bury the core functionality in yet another directory:
 
@@ -95,6 +95,8 @@ hello_world
 ├── .git
 └── __init__.py
 ```
+
+Notice now that the name (concern) "hello world" appears exactly once. Renaming the project happens in only one place (instead of multiple places).
 
 ## Essentially Composable
 
