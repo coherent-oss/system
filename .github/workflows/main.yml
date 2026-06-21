@@ -69,15 +69,8 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
           allow-prereleases: true
-      - name: Install wget (Windows only)
-        if: runner.os == 'Windows'
-        run: winget install --id JernejSimoncic.Wget --silent --accept-package-agreements --accept-source-agreements
-      - name: Add wget to PATH
-        if: runner.os == 'Windows'
-        run: echo "$env:LOCALAPPDATA\Microsoft\WinGet\Links" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-        shell: powershell
       - name: Workaround pypa/pipx#1539
-        run: wget https://raw.githubusercontent.com/jaraco/pipx-1539/main/workaround-1539.py -O - | python3
+        run: curl -fsSL https://raw.githubusercontent.com/jaraco/pipx-1539/main/workaround-1539.py | python3
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
         run: pipx run --python ${{ matrix.python }} 'coherent.test>=0.7.0'
         env:
