@@ -81,6 +81,14 @@ __requires__ = [
 > To extract the `__requires__` list to pass it to pip or other tools,
 > check [_Extracting Requirements_ in pip-run](https://github.com/jaraco/pip-run#extracting-requirements).
 
+Want to declare a license? License selection is treated as a positive signal, so a project without a declared license simply carries no license metadata. To indicate one, declare a [SPDX license expression](https://spdx.org/licenses/) in the `__license__` attribute of `__init__.py`:
+
+```python
+__license__ = "Apache-2.0"
+```
+
+The system then publishes that expression in the package metadata and, for supported layouts, includes the corresponding license text in the distribution.
+
 Add a README.md to the repo to give users an overview to be included in the project's description.
 
 Ready to create some tests? Create doctests or a `tests` dir with modules containing pytest tests. Then run the tests using `coh test` or `pipx run coherent.cli test`:
