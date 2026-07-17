@@ -87,7 +87,7 @@ To indicate a license, declare a [SPDX license expression](https://spdx.org/lice
 __license__ = "Apache-2.0"
 ```
 
-The system then publishes that expression in the package metadata and renders the corresponding license text in the distribution.
+The system then publishes that expression in the package metadata and renders the corresponding license text in the distribution. Omitting a license indicator will leave the distribution without any indicated license.
 
 Add a README.md to the repo to give users an overview to be included in the project's description.
 
