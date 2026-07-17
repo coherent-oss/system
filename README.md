@@ -81,7 +81,7 @@ __requires__ = [
 > To extract the `__requires__` list to pass it to pip or other tools,
 > check [_Extracting Requirements_ in pip-run](https://github.com/jaraco/pip-run#extracting-requirements).
 
-Want to declare a license? License selection is treated as a positive signal, so a project without a declared license simply carries no license metadata. To indicate one, declare a [SPDX license expression](https://spdx.org/licenses/) in the `__license__` attribute of `__init__.py`:
+To indicate a license, declare a [SPDX license expression](https://spdx.org/licenses/) in the `__license__` attribute of `__init__.py`:
 
 ```python
 __license__ = "Apache-2.0"
