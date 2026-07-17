@@ -87,7 +87,7 @@ Want to declare a license? License selection is treated as a positive signal, so
 __license__ = "Apache-2.0"
 ```
 
-The system then publishes that expression in the package metadata and, for supported layouts, includes the corresponding license text in the distribution.
+The system then publishes that expression in the package metadata and renders the corresponding license text in the distribution.
 
 Add a README.md to the repo to give users an overview to be included in the project's description.
 
