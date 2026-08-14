@@ -13,6 +13,7 @@ test-linux:
     # Let git know that the project dir is safe. coherent-oss/system#18
     - git config --global --add safe.directory $CI_PROJECT_DIR
 
+    - pipx install uv
     - uvx --python 3.12 --from coherent.cli python -m coherent.cli test
 
 
@@ -23,6 +24,7 @@ publish:
     - if: $CI_COMMIT_TAG
 
     script:
+    - pipx install uv
     - uvx --python 3.12 --from coherent.cli python -m coherent.cli build
 
     # Retrieve the OIDC token from GitLab CI/CD, and exchange it for a PyPI API token.
