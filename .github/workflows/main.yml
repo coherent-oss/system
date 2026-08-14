@@ -71,6 +71,8 @@ jobs:
           allow-prereleases: true
       - name: Workaround pypa/pipx#1539
         run: curl -fsSL https://raw.githubusercontent.com/jaraco/pipx-1539/main/workaround-1539.py | python3
+      - name: Install uv (provides uvx)
+        run: pipx install uv
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
         run: uvx --python ${{ matrix.python }} --from 'coherent.test>=0.7.0' python -m coherent.test
         env:
@@ -151,6 +153,8 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: 3.x
+    - name: Install uv (provides uvx)
+      run: pipx install uv
     - name: Build and upload to PyPI
       run: |
         uvx --from coherent.cli python -m coherent.cli build
