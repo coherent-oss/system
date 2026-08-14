@@ -72,7 +72,7 @@ jobs:
       - name: Workaround pypa/pipx#1539
         run: curl -fsSL https://raw.githubusercontent.com/jaraco/pipx-1539/main/workaround-1539.py | python3
       - name: Run tests for ${{ matrix.python }} (${{ runner.os }})
-        run: pipx run --python ${{ matrix.python }} 'coherent.test>=0.7.0'
+        run: uvx --python ${{ matrix.python }} --from 'coherent.test>=0.7.0' python -m coherent.test
         env:
           # See coherent-oss/coherent.build#21
           GH_TOKEN: ${{ github.token }}
@@ -91,7 +91,7 @@ jobs:
   #       python-version: 3.x
   #   - run: |
   #       set -euxo pipefail
-  #       pipx run --pip-args pytest-cov 'coherent.test>=0.7.0' --cov --cov-report xml
+  #       uvx --with pytest-cov --from 'coherent.test>=0.7.0' python -m coherent.test --cov --cov-report xml
   #       pip install diff-cover
   #       diff-cover coverage.xml --compare-branch=origin/main --html-report diffcov.html
   #       diff-cover coverage.xml --compare-branch=origin/main --fail-under=100
@@ -153,8 +153,8 @@ jobs:
         python-version: 3.x
     - name: Build and upload to PyPI
       run: |
-        pipx run coherent.cli build
-        pipx run twine upload dist/*
+        uvx --from coherent.cli python -m coherent.cli build
+        uvx twine upload dist/*
       env:
         TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         GH_TOKEN: ${{ github.token }}
