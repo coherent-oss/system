@@ -89,6 +89,15 @@ __license__ = "Apache-2.0"
 
 The system then publishes that expression in the package metadata and renders the corresponding license text in the distribution. Omitting a license indicator will leave the distribution without any indicated license.
 
+Packages are presumed to be typed. Since coherent packages are written with inline annotations, the system emits a [PEP 561](https://peps.python.org/pep-0561/) `py.typed` marker into the built package, so a consumer's type checker honors those annotations without any boilerplate. A package that is knowingly untyped opts out in `__init__.py`:
+
+```python
+__typed__ = False
+```
+
+> [!Note]
+> The marker only takes effect for regular installs. Type checkers resolve it statically against the install location, while an editable install redirects imports at runtime, so annotations from an editable install remain invisible to them ([coherent.build#74](https://github.com/coherent-oss/coherent.build/issues/74)).
+
 Add a README.md to the repo to give users an overview to be included in the project's description.
 
 Ready to create some tests? Create doctests or a `tests` dir with modules containing pytest tests. Then run the tests using `coh test` or `pipx run coherent.cli test`:
