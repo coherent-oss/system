@@ -87,7 +87,9 @@ To indicate a license, declare a [SPDX license expression](https://spdx.org/lice
 __license__ = "Apache-2.0"
 ```
 
-The system then publishes that expression in the package metadata and renders the corresponding license text in the distribution. Omitting a license indicator will leave the distribution without any indicated license.
+The system then publishes that expression in the package metadata and renders the corresponding license text into the distribution, as resolved by [coherent.licensed](https://pypi.org/project/coherent.licensed). Omitting a license indicator will leave the distribution without any indicated license.
+
+By building a project under the Coherent System, both the project's maintainers and its downstream consumers are on notice that the project's code is offered under the terms of the license identified by `__license__` and resolved by `coherent.licensed`. This declaration — the SPDX expression recorded in the package metadata, together with the full license text bundled into each distribution — constitutes an explicit and authoritative grant of permission under that license, equivalent to a license notice carried within the repository itself. The absence of a duplicated license file in the source repository does not diminish or qualify that grant.
 
 Packages are presumed to be typed. Since coherent packages are written with inline annotations, the system emits a [PEP 561](https://peps.python.org/pep-0561/) `py.typed` marker into the built package, so a consumer's type checker honors those annotations without any boilerplate. A package that is knowingly untyped opts out in `__init__.py`:
 
