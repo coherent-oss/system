@@ -98,9 +98,22 @@ hello_world
 
 Notice now that the name (concern) "hello world" appears exactly once. Renaming the project happens in only one place (instead of multiple places).
 
+## Clone Directly Into a Search Path
+
+Because the repository root _is_ the package directory, a pure package (one that requires no build steps) can be cloned directly into `site-packages`—or any directory on `sys.path` or `PYTHONPATH`—and imported immediately:
+
+```shell
+$ cd $(python -c 'import site; print(site.getsitepackages()[0])')
+$ git clone https://example.com/hello_world
+$ python -c 'import hello_world; print(hello_world.__file__)'
+```
+
+No build step, no install step, no transformation from a "repo shape" into an "installed shape." The checkout works as-is because its layout already matches what the import system expects. Editing the code, switching branches, or checking out a different tag takes effect on the next import—the working copy and the importable package are one and the same.
+
+
 ## Essentially Composable
 
-Since the essential layout moves the code into the root of the repository, it allows the root of the repo to represent the directory of the package, enabling lots of useful benefits:
+Since the essential layout moves the code into the root of the repository, it allows the root of the repo to represent the directory of the package, so projects compose into a single tree in which the essential functionality is presented at the top and ancillary concerns are tucked away. This enables lots of useful benefits:
 
 - A pure package (something that requires no build steps) can be cloned directly into the site-packages and imported.
 - A build system could clone a series of packages into a directory tree, build the respective packages, and run them in place.
@@ -152,6 +165,13 @@ superproject
     ├── (meta)
     └── __init__.py
 ```
+
+
+## Beyond Python
+
+Although the essential layout is described here in terms of Python packages, the underlying idea is language-agnostic: let the repository root _be_ the unit of code as the ecosystem consumes it, and tuck ancillary concerns out of the way. Any language whose module or namespace resolution is driven by directory structure can benefit.
+
+Consider a .NET project. Today a solution typically carries a nest of `src` directories, intermediate build instructions, and generated artifacts that stand between the source tree and the compiled output. Applying the essential layout, a tree of code could be composed—each library's root holding its source directly—and compiled into a single binary without the indirection of per-project `src` directories and hand-maintained build scaffolding. The shape of the tree would reflect the shape of the resulting assembly, just as the Python tree reflects the installed package layout.
 
 
 ## All Together
